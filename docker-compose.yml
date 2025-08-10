@@ -1,0 +1,40 @@
+services:
+  postgres:
+    restart: always
+    image: "postgres:17.5"
+    container_name: postgres-tb
+    ports:
+      - "5432"
+    environment:
+      POSTGRES_DB: thingsboard
+      POSTGRES_PASSWORD: postgres
+      TZ: America/Guayaquil
+    volumes:
+      - ./data:/var/lib/postgresql/data
+  thingsboard-ce:
+    restart: always
+    image: "thingsboard/tb-node:4.1.0"
+    container_name: thingsboard
+    ports:
+      - "8080:8080"
+      - "7070:7070"
+      - "1883:1883"
+      - "8883:8883"
+      - "5683-5688:5683-5688/udp"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+    environment:
+      TB_SERVICE_ID: tb-ce-node
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/thingsboard
+      TZ: America/Guayaquil
+      SSL_ENABLED: "true"
+      SSL_PEM_CERT: "/etc/thingsboard/ssl/server.pem"
+      MQTT_SSL_ENABLED: "true"
+      MQTT_SSL_PEM_CERT: "/etc/thingsboard/ssl/server.pem"
+    volumes:
+      - ./ssl:/etc/thingsboard/ssl
+    depends_on:
+      - postgres
