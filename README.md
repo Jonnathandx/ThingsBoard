@@ -10,9 +10,9 @@ Incluye configuración para **TLS/SSL**, puertos configurables y persistencia de
 ```bash
 .
 ├── docker-compose.yml
-├── .env
-├── data/ # Datos persistentes de PostgreSQL
-└── ssl/ # Certificados SSL para ThingsBoard
+├── 🛠️ .env
+├── 📁 data/ # Datos persistentes de PostgreSQL
+└── 📁 ssl/ # Certificados SSL para ThingsBoard
 ```
 
 ## ⚙️ Variables de entorno
