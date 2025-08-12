@@ -7,3 +7,8 @@ Incluye configuración para **TLS/SSL**, puertos configurables y persistencia de
 
 ## 📂 Estructura del proyecto
 
+.
+├── docker-compose.yml
+├── .env
+├── data/ # Datos persistentes de PostgreSQL
+└── ssl/ # Certificados SSL para ThingsBoard
